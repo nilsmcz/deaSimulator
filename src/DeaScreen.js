@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@mantine/core';
-
+import { TextInput } from '@mantine/core';
 //StateMachine
 import StateMachine from './stateMachine/StateMachine';
 import State from './stateMachine/State';
@@ -8,22 +8,61 @@ import Transition from './stateMachine/Transition';
 
 export default function DeaScreen() {
 
-    const [dea, setDea] = useState(null)
+    const [dea, setDea] = useState(new StateMachine("My DEA",[]))
+    const [valueAddAlphabet, setValueAddAlphabet] = useState('');
+    const [valueAddStates, setValueAddStates] = useState('');
 
-    useEffect(() => {
-        const dea = new StateMachine([])
-        setDea(dea)
-    }, [])
+    function copyDea(prevDea){
+        const newDea = new StateMachine(prevDea.name, [...prevDea.states], [...prevDea.alphabet]) // Kopie des Zustands
+        return newDea
+    }
 
-    function addState(){
-        const stateCount = dea?.states?.length ?? 0
-        dea.addState(new State("S" + stateCount))
-        console.log(dea.states)
+    function addState(name){
+        setDea((prevDea) => {
+            const newState = new State(name);
+            const newDea = copyDea(prevDea)
+            newDea.addState(newState)
+            console.log(newDea.states)
+            return newDea;
+        });
+    }
+
+    function addAlphabet(symbol){
+        setDea((prevDea) => {
+            const newDea = copyDea(prevDea) // Kopie des Zustands
+            newDea.addAlphabet(symbol)
+            setValueAddAlphabet("")
+            return newDea
+        });
     }
 
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw"}}>
-            <Button variant="filled" color="rgba(15, 23, 42, 1)" onClick={()=>addState()}>State hinzufügen</Button>
+
+            <div style={{display:"flex", flexDirection:"row"}}>
+                &Sigma; = &#123;{dea.alphabet.join(', ')}&#125;
+                <TextInput
+                    size="xs"
+                    value={valueAddAlphabet}
+                    onChange={(event) => setValueAddAlphabet(event.currentTarget.value)}
+                    placeholder="Symbol"
+                />
+                <Button size="xs" variant="filled" color="rgba(15, 23, 42, 1)" onClick={()=>addAlphabet(valueAddAlphabet)}>+</Button>
+            </div>
+
+            <div style={{display:"flex", flexDirection:"row"}}>
+                V = &#123;{dea.states.map(state => state.name).join(', ')}&#125;
+                <TextInput
+                    size="xs"
+                    value={valueAddStates}
+                    onChange={(event) => setValueAddStates(event.currentTarget.value)}
+                    placeholder="Symbol"
+                />
+                <Button size="xs" variant="filled" color="rgba(15, 23, 42, 1)" onClick={()=>addState(valueAddStates)}>+</Button>
+            </div>
+
+
+            <Button size="xs" variant="filled" color="rgba(15, 23, 42, 1)" onClick={()=>addState()}>State hinzufügen</Button>
         </div>
     )
 }

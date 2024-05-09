@@ -1,33 +1,41 @@
 export default class StateMachine {
 
-  states = []
-  currentState
+  name = "" //String
+  states = [] //List vom Typ State
+  alphabet = [] //List vom Typ String
+  initialState = null //State
+  currentState = null //State
 
-  constructor(states) {
+  constructor(name = "My DEA", states = [], alphabet = ["a", "b"]) {
+    this.name = name
     this.states = states
     this.currentState = states[0]
-  }
-
-    transition(action) {
-      let transition = null
-      for (const t of this.currentState.transitions) {
-        if (t.action === action) {
-          transition = t
-          break
-        }
-      }
-      if (transition) {
-        this.currentState = transition.to
-      } else {
-        console.log('Invalid action')
-      }
-  }
-
-  printCurrentState() {
-    console.log(this.currentState.name)
+    this.alphabet = alphabet
   }
 
   addState(state) {
     this.states.push(state)
+  }
+  
+  removeState(state) {
+    this.states = this.states.filter(s => s != state)
+  }
+
+  addAlphabet(symbol) {
+    if (!this.alphabet.includes(symbol)) {
+      this.alphabet.push(symbol)
+    }
+  }
+
+  removeAlphabet(symbol){
+    this.alphabet = this.alphabet.filter(s => s != symbol)
+  }
+
+  setName(name){
+    this.name = name
+  }
+
+  setInitialState(state){
+    this.initialState = state
   }
 }
