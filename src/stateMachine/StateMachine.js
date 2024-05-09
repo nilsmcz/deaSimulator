@@ -14,7 +14,8 @@ export default class StateMachine {
   }
 
   addState(state) {
-    this.states.push(state)
+    if (state.name.trim() === "") return
+    this.states.push(state);
   }
   
   removeState(state) {

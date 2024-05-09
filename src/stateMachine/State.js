@@ -2,11 +2,11 @@ import Transition from './Transition.js'
 
 export default class State {
 
-  name
+  name = "" //String
   terminating = false
   transitions = []
 
-  constructor(name, terminating = false) {
+  constructor( name = "", terminating = false) {
     this.name = name
     this.terminating = terminating
   }

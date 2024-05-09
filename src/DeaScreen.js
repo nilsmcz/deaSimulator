@@ -22,14 +22,14 @@ export default function DeaScreen() {
             const newState = new State(name);
             const newDea = copyDea(prevDea)
             newDea.addState(newState)
-            console.log(newDea.states)
+            setValueAddStates("")
             return newDea;
         });
     }
 
     function addAlphabet(symbol){
         setDea((prevDea) => {
-            const newDea = copyDea(prevDea) // Kopie des Zustands
+            const newDea = copyDea(prevDea)
             newDea.addAlphabet(symbol)
             setValueAddAlphabet("")
             return newDea
@@ -60,9 +60,6 @@ export default function DeaScreen() {
                 />
                 <Button size="xs" variant="filled" color="rgba(15, 23, 42, 1)" onClick={()=>addState(valueAddStates)}>+</Button>
             </div>
-
-
-            <Button size="xs" variant="filled" color="rgba(15, 23, 42, 1)" onClick={()=>addState()}>State hinzufügen</Button>
         </div>
     )
 }
