@@ -75,7 +75,7 @@ export default function DeaScreen() {
             });
         } else {
             if (transitions[startState][actionSymbol]) {
-                const override = window.confirm("Es existiert bereits ein Übergang für dieses Symbol von diesem Zustand. Möchten Sie den Übergang überschreiben?");
+                const override = window.confirm("There is already a transition for this symbol from this state. Do you want to override the transition?");
                 if (!override) return;
             }
     
