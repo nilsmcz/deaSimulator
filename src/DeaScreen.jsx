@@ -107,9 +107,9 @@ export default function DeaScreen() {
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw", gap:"50px"}}>
 
-            {/* <Alert variant="light" color="red" title="Betaphase">
+            <Alert variant="light" color="red" title="Betaphase">
                 Diese Seite befindet sich in der Entwicklungsphase.
-            </Alert> */}
+            </Alert>
 
             <div style={{display:"flex", flexDirection:"column", width:"auto", height:"auto", justifyContent:"center", alignItems:"start", backgroundColor:"", gap:"5px", maxWidth:"500px"}}>
                 <Text size="md">G = (V, &Sigma;, P, S)</Text>
