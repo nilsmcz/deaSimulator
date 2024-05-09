@@ -30,6 +30,11 @@ q2 ➝ a q1
 q2 ➝ b q3
 ```
 
+## Vorschau
+
+<img src="https://i.ibb.co/tLC1SBQ/preview1.png" alt="preview1" width="100%">
+<img src="https://i.ibb.co/pLTYkGW/preview2.png" alt="preview2" width="100%">
+
 # Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
