@@ -39,6 +39,10 @@ export default function DeaScreen() {
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw"}}>
 
+            <h1>{dea.name}</h1>
+
+            G = (V, &Sigma;, P, q0)
+            
             <div style={{display:"flex", flexDirection:"row"}}>
                 &Sigma; = &#123;{dea.alphabet.join(', ')}&#125;
                 <TextInput
