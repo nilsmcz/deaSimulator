@@ -16,9 +16,11 @@ export default function DeaScreen() {
     const [statesInput, setStatesInput] = useState(""); //String
 
     const [transitions, setTransitions] = useState({});
-    const [transitionsStartStateInput, setTransitionsStartStateInput] = useState("");
-    const [transitionsActionSymbolInput, setTransitionsActionSymbolInput] = useState("");
-    const [transitionsEndStateInput, setTransitionsEndStateInput] = useState("");
+
+    const [isInTransitionsInput, setIsInTransitionsInput] = useState(false);
+    const [transitionsStartStateInput, setTransitionsStartStateInput] = useState(null);
+    const [transitionsActionSymbolInput, setTransitionsActionSymbolInput] = useState(null);
+    const [transitionsEndStateInput, setTransitionsEndStateInput] = useState(null);
 
     function addAlphabet(symbol) {
         if(symbol === "") return;
@@ -45,6 +47,63 @@ export default function DeaScreen() {
         setStates([]);
     }
 
+    function clearTransitions() {
+        setTransitions({});
+    }
+
+    function resetTransitionInput(){
+        setTransitionsStartStateInput(null);
+        setTransitionsActionSymbolInput(null);
+        setTransitionsEndStateInput(null);
+    }
+
+    function cancelTransitionInput(){
+        resetTransitionInput();
+        setIsInTransitionsInput(false);
+    }
+
+    function submitTransitionInput(startState, actionSymbol, endState){
+        if(startState == null || actionSymbol == null) return;
+        if(actionSymbol !== "ε" && endState == null) return;
+    
+        if (!transitions[startState]) {
+            setTransitions({
+                ...transitions,
+                [startState]: {
+                    [actionSymbol]: endState
+                }
+            });
+        } else {
+            if (transitions[startState][actionSymbol]) {
+                const override = window.confirm("Es existiert bereits ein Übergang für dieses Symbol von diesem Zustand. Möchten Sie den Übergang überschreiben?");
+                if (!override) return;
+            }
+    
+            setTransitions({
+                ...transitions,
+                [startState]: {
+                    ...transitions[startState],
+                    [actionSymbol]: endState
+                }
+            });
+        }
+        resetTransitionInput()
+    }
+    
+
+    // Beispiel für Übergänge:
+    // transitions = {
+    //   'q1': {
+    //     'a': 'q2',
+    //     'b': 'q3',
+    //   },
+    //   'q2': {
+    //     'a': 'q1',
+    //     'b': 'q3',
+    //   },
+    //   ...
+    // };
+
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw", gap:"50px"}}>
 
@@ -56,7 +115,7 @@ export default function DeaScreen() {
                 <Text size="md">G = (V, &Sigma;, P, S)</Text>
 
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"20px"}}>
-                    <Text size="md">V = {`{${states.map(state => state.name).join(', ')}}`}</Text>
+                    <Text size="md">V = {`{${states.join(', ')}}`}</Text>
                     <div style={{display:"flex", flexDirection:"row", gap:"5px"}}>
                         <div style={{width:"50px"}}><TextInput size="xs" variant="filled" placeholder='"q1"' value={statesInput} onChange={(event) => setStatesInput(event.currentTarget.value)}/></div>
                         <Button size="xs" variant="filled" color="cyan" onClick={()=>addStates(statesInput)}>Add</Button>
@@ -75,20 +134,33 @@ export default function DeaScreen() {
 
                 <Text size="md">P: </Text>
 
-                <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"10px"}}>
-                    <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states}/></div>
-                    ➝
-                    <div style={{width:"80px"}}><Select size="xs" placeholder="symbol" data={alphabet}/></div>
-                    <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states}/></div>
-                    <div style={{display:"flex", gap:"5px"}}>
-                        <Button size="xs" variant="filled" color="cyan" onClick={()=>addAlphabet(alphabetInput)}>Submit</Button>
-                        <Button size="xs" variant="filled" color="red" onClick={()=>clearAlphabet()}>Reset</Button>
+                {Object.entries(transitions).map(([startState, transition]) => (
+                    Object.entries(transition).map(([actionSymbol, endState]) => (
+                        <div key={`${startState}-${actionSymbol}-${endState}`}>
+                            {`${startState} ➝ ${actionSymbol} ${endState === null ? "" :  endState}`}
+                        </div>
+                    ))
+                ))}
+
+                {isInTransitionsInput &&
+                    <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"10px"}}>
+                        <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states} value={transitionsStartStateInput} onChange={setTransitionsStartStateInput}/></div>
+                        ➝
+                        <div style={{width:"80px"}}><Select size="xs" placeholder="symbol" data={alphabet} value={transitionsActionSymbolInput} onChange={setTransitionsActionSymbolInput}/></div>
+                        {transitionsActionSymbolInput != "ε" &&
+                            <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states} value={transitionsEndStateInput} onChange={setTransitionsEndStateInput}/></div>
+                        }
+                        <div style={{display:"flex", gap:"5px"}}>
+                            <Button size="xs" variant="filled" color="cyan" onClick={()=>submitTransitionInput(transitionsStartStateInput, transitionsActionSymbolInput, transitionsEndStateInput)}>Submit</Button>
+                            <Button size="xs" variant="filled" color="red" onClick={()=>resetTransitionInput()}>Reset</Button>
+                            <Button size="xs" variant="filled" color="red" onClick={()=>cancelTransitionInput()}>Cancel</Button>
+                        </div>
                     </div>
-                </div>
+                }
 
                 <div style={{display:"flex", flexDirection:"row", gap:"5px"}}>
-                    <Button size="xs" variant="filled" color="cyan" onClick={()=>addAlphabet(alphabetInput)}>Add</Button>
-                    <Button size="xs" variant="filled" color="red" onClick={()=>clearAlphabet()}>Clear</Button>
+                    <Button size="xs" disabled={isInTransitionsInput} variant="filled" color="cyan" onClick={()=>setIsInTransitionsInput(true)}>Add</Button>
+                    <Button size="xs" variant="filled" color="red" onClick={()=>clearTransitions()}>Clear</Button>
                 </div>
 
             </div>
