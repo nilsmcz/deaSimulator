@@ -6,7 +6,7 @@ export default class StateMachine {
   initialState = null //State
   currentState = null //State
 
-  constructor(name = "My DEA", states = [], alphabet = ["a", "b"]) {
+  constructor(name = "My DEA", states = [], alphabet = []) {
     this.name = name
     this.states = states
     this.currentState = states[0]
