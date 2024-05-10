@@ -111,6 +111,11 @@ export default function DeaScreen() {
                 Diese Seite befindet sich in der Entwicklungsphase.
             </Alert>
 
+            <div style={{display:"flex", flexDirection:"row", gap:"5px", justifyContent:"center", alignItems:"end"}}>
+                <TextInput size="xs" label="Word" description="" placeholder="abbca"/>
+                <Button size="xs" variant="filled" color="cyan">Check</Button>
+            </div>
+
             <div style={{display:"flex", flexDirection:"column", width:"auto", height:"auto", justifyContent:"center", alignItems:"start", backgroundColor:"", gap:"5px", maxWidth:"500px"}}>
                 <Text size="md">G = (V, &Sigma;, P, S)</Text>
 
