@@ -14,6 +14,7 @@ export default function DeaScreen() {
 
     const [states, setStates] = useState([]); //State array
     const [statesInput, setStatesInput] = useState(""); //String
+    const [startState, setStartState] = useState(""); //String
 
     const [transitions, setTransitions] = useState({});
 
@@ -37,6 +38,8 @@ export default function DeaScreen() {
 
         setStates([...states, stateName]);
         setStatesInput("");
+
+        if(startState == "") setStartState(stateName);
     }
 
     function clearAlphabet() {
@@ -118,6 +121,11 @@ export default function DeaScreen() {
 
             <div style={{display:"flex", flexDirection:"column", width:"auto", height:"auto", justifyContent:"center", alignItems:"start", backgroundColor:"", gap:"5px", maxWidth:"500px"}}>
                 <Text size="md">G = (V, &Sigma;, P, S)</Text>
+
+                <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"20px"}}>
+                    <Text size="md">S = </Text>
+                    <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states} value={startState} onChange={setStartState}/></div>
+                </div>
 
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"20px"}}>
                     <Text size="md">V = {`{${states.join(', ')}}`}</Text>
