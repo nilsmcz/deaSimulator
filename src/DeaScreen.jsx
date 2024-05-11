@@ -126,7 +126,7 @@ export default function DeaScreen() {
 
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"20px"}}>
                     <Text size="md">S = </Text>
-                    <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states} value={startState} onChange={setStartState}/></div>
+                    <div style={{width:"70px"}}><Select size="xs" placeholder="S ∈ V" data={states} value={startState} onChange={setStartState}/></div>
                 </div>
 
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"20px"}}>
