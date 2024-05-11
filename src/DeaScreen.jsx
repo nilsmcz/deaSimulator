@@ -47,14 +47,26 @@ export default function DeaScreen() {
 
     function clearAlphabet() {
         setAlphabet(["ε"]);
+        clearTransitions();
     }
 
     function clearStates() {
         setStates([]);
+        clearStartState();
+        clearTransitions();
     }
 
     function clearTransitions() {
         setTransitions({});
+        clearEndStates();
+    }
+
+    function clearStartState() {
+        setStartState("");
+    }
+
+    function clearEndStates() {
+        setEndStates([]);
     }
 
     function resetTransitionInput(){
