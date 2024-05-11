@@ -15,7 +15,9 @@ export default function DeaScreen() {
     const [states, setStates] = useState([]); //State array
     const [statesInput, setStatesInput] = useState(""); //String
     const [startState, setStartState] = useState(""); //String
-    const [endState, setEndState] = useState("ε"); //String
+    const [endStates, setEndStates] = useState([]); //String
+
+    const [word, setWord] = useState(""); //String
 
     const [transitions, setTransitions] = useState({});
 
@@ -71,6 +73,10 @@ export default function DeaScreen() {
         if(actionSymbol !== "ε" && endState == null) return;
 
         if(endState == null || endState == "") endState = "ε";
+
+        if(actionSymbol == "ε"){
+            endStates.push(startState);
+        };
     
         if (!transitions[startState]) {
             setTransitions({
@@ -109,6 +115,36 @@ export default function DeaScreen() {
     //   ...
     // };
 
+    function checkWord(word){
+        let currentState = startState
+        let isValid = true
+    
+        // Durch jedes Symbol im Wort iterieren
+        for (let i = 0; i < word.length; i++) {
+            const symbol = word[i]
+    
+            // Prüfen, ob es einen Übergang für das aktuelle Symbol im aktuellen Zustand gibt
+            if (transitions[currentState] && transitions[currentState][symbol]) {
+                currentState = transitions[currentState][symbol]
+            } else {
+                isValid = false
+                break
+            }
+        }
+    
+        // Endzustand erreicht?
+        if (!endStates.includes(currentState)) {
+            isValid = false
+        }
+    
+        // Ausgabe
+        if (isValid) {
+            console.log("Das Wort wird akzeptiert.")
+        } else {
+            console.log("Das Wort wird nicht akzeptiert.")
+        }
+    }
+
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw", gap:"50px"}}>
 
@@ -117,8 +153,8 @@ export default function DeaScreen() {
             </Alert>
 
             <div style={{display:"flex", flexDirection:"row", gap:"5px", justifyContent:"center", alignItems:"end"}}>
-                <TextInput size="xs" label="Word" description="" placeholder="abbca"/>
-                <Button size="xs" variant="filled" color="cyan" onClick={()=>submitTransitionInput(startState, states, transitions, [])}>Check</Button>
+                <TextInput size="xs" label="Word" description="" placeholder="abbca" value={word} onChange={(event) => setWord(event.currentTarget.value)}/>
+                <Button size="xs" variant="filled" color="cyan" onClick={()=>checkWord(word)}>Check</Button>
             </div>
 
             <div style={{display:"flex", flexDirection:"column", width:"auto", height:"auto", justifyContent:"center", alignItems:"start", backgroundColor:"", gap:"5px", maxWidth:"500px"}}>
