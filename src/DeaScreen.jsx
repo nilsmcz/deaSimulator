@@ -15,6 +15,7 @@ export default function DeaScreen() {
     const [states, setStates] = useState([]); //State array
     const [statesInput, setStatesInput] = useState(""); //String
     const [startState, setStartState] = useState(""); //String
+    const [endState, setEndState] = useState("ε"); //String
 
     const [transitions, setTransitions] = useState({});
 
@@ -68,6 +69,8 @@ export default function DeaScreen() {
     function submitTransitionInput(startState, actionSymbol, endState){
         if(startState == null || actionSymbol == null) return;
         if(actionSymbol !== "ε" && endState == null) return;
+
+        if(endState == null || endState == "") endState = "ε";
     
         if (!transitions[startState]) {
             setTransitions({
@@ -92,7 +95,6 @@ export default function DeaScreen() {
         }
         resetTransitionInput()
     }
-    
 
     // Beispiel für Übergänge:
     // transitions = {
@@ -116,7 +118,7 @@ export default function DeaScreen() {
 
             <div style={{display:"flex", flexDirection:"row", gap:"5px", justifyContent:"center", alignItems:"end"}}>
                 <TextInput size="xs" label="Word" description="" placeholder="abbca"/>
-                <Button size="xs" variant="filled" color="cyan">Check</Button>
+                <Button size="xs" variant="filled" color="cyan" onClick={()=>submitTransitionInput(startState, states, transitions, [])}>Check</Button>
             </div>
 
             <div style={{display:"flex", flexDirection:"column", width:"auto", height:"auto", justifyContent:"center", alignItems:"start", backgroundColor:"", gap:"5px", maxWidth:"500px"}}>
@@ -150,7 +152,7 @@ export default function DeaScreen() {
                 {Object.entries(transitions).map(([startState, transition]) => (
                     Object.entries(transition).map(([actionSymbol, endState]) => (
                         <div key={`${startState}-${actionSymbol}-${endState}`}>
-                            {`${startState} ➝ ${actionSymbol} ${endState === null ? "" :  endState}`}
+                            {`${startState} ➝ ${actionSymbol} ${(endState == null || endState == "ε") ? "" :  endState}`}
                         </div>
                     ))
                 ))}
