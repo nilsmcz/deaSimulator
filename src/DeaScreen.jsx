@@ -6,7 +6,6 @@ import { Text } from '@mantine/core';
 import { Alert } from '@mantine/core';
 import { Select } from '@mantine/core';
 
-import State from './stateMachine/State';
 
 export default function DeaScreen() {
     const [alphabet, setAlphabet] = useState(["ε"]); //String array
@@ -20,8 +19,13 @@ export default function DeaScreen() {
     const [word, setWord] = useState(""); //String
     function updateWord(word){
         setWord(word);
+        if(word == "") {
+            setIsWordInLanguage(null);
+            return;
+        }
         checkWord(word);
     }
+    const [isWordInLanguage, setIsWordInLanguage] = useState(null); //String
 
     const [transitions, setTransitions] = useState({});
 
@@ -155,8 +159,10 @@ export default function DeaScreen() {
     
         // Ausgabe
         if (isValid) {
+            setIsWordInLanguage(true)
             console.log("Das Wort wird akzeptiert.")
         } else {
+            setIsWordInLanguage(false)
             console.log("Das Wort wird nicht akzeptiert.")
         }
     }
@@ -168,9 +174,10 @@ export default function DeaScreen() {
                 Diese Seite befindet sich in der Entwicklungsphase.
             </Alert>
 
-            <div style={{display:"flex", flexDirection:"row", gap:"5px", justifyContent:"center", alignItems:"end"}}>
+            <div style={{display:"flex", flexDirection:"column", gap:"5px", justifyContent:"center", alignItems:"start"}}>
                 <TextInput size="xs" label="Word" description="" placeholder="abbca" value={word} onChange={(event) => updateWord(event.currentTarget.value)}/>
-                <Button size="xs" variant="filled" color="cyan" onClick={()=>checkWord(word)}>Check</Button>
+                {/* <Button size="xs" variant="filled" color="cyan" onClick={()=>checkWord(word)}>Check</Button> */}
+                {isWordInLanguage != null && <span style={{fontSize:"12px", color:isWordInLanguage ? "green" : "red"}}>{isWordInLanguage ? "Akzeptiert" : "Nicht akzeptiert"}</span>}
             </div>
 
             <div style={{display:"flex", flexDirection:"column", width:"auto", height:"auto", justifyContent:"center", alignItems:"start", backgroundColor:"", gap:"5px", maxWidth:"500px"}}>
