@@ -18,6 +18,10 @@ export default function DeaScreen() {
     const [endStates, setEndStates] = useState([]); //String
 
     const [word, setWord] = useState(""); //String
+    function updateWord(word){
+        setWord(word);
+        checkWord(word);
+    }
 
     const [transitions, setTransitions] = useState({});
 
@@ -165,7 +169,7 @@ export default function DeaScreen() {
             </Alert>
 
             <div style={{display:"flex", flexDirection:"row", gap:"5px", justifyContent:"center", alignItems:"end"}}>
-                <TextInput size="xs" label="Word" description="" placeholder="abbca" value={word} onChange={(event) => setWord(event.currentTarget.value)}/>
+                <TextInput size="xs" label="Word" description="" placeholder="abbca" value={word} onChange={(event) => updateWord(event.currentTarget.value)}/>
                 <Button size="xs" variant="filled" color="cyan" onClick={()=>checkWord(word)}>Check</Button>
             </div>
 
