@@ -37,7 +37,7 @@ q2 ➝ b q3
 
 ### Live-Vorschau
 
-Live-Vorschau: [Vorschau anzeigen](https://66427156fc4e55200bec7515--funny-kelpie-be23d3.netlify.app/)
+Live-Vorschau: <a href="https://66427156fc4e55200bec7515--funny-kelpie-be23d3.netlify.app/" target="_blank">Vorschau anzeigen</a>
 
 # Getting Started
 
