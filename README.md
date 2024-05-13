@@ -35,6 +35,10 @@ q2 ➝ b q3
 <img src="https://i.ibb.co/483ZkVT/preview1.png" alt="" width="100%">
 <img src="https://i.ibb.co/HrNZh4t/preview2.png" alt="" width="100%">
 
+### Live-Vorschau
+
+Live-Vorschau: [Vorschau anzeigen](https://66427156fc4e55200bec7515--funny-kelpie-be23d3.netlify.app/)
+
 # Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
