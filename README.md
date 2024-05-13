@@ -32,8 +32,8 @@ q2 ➝ b q3
 
 ## Vorschau
 
-<img src="https://i.ibb.co/tLC1SBQ/preview1.png" alt="preview1" width="100%">
-<img src="https://i.ibb.co/pLTYkGW/preview2.png" alt="preview2" width="100%">
+<img src="https://i.ibb.co/483ZkVT/preview1.png" alt="" width="100%">
+<img src="https://i.ibb.co/HrNZh4t/preview2.png" alt="" width="100%">
 
 # Getting Started
 
