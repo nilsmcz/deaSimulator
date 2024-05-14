@@ -5,7 +5,7 @@ import { TextInput } from '@mantine/core';
 import { Text } from '@mantine/core';
 import { Alert } from '@mantine/core';
 import { Select } from '@mantine/core';
-
+import { FileInput } from '@mantine/core';
 
 export default function DeaScreen() {
     const [alphabet, setAlphabet] = useState(["ε"]); //String array
@@ -264,8 +264,9 @@ export default function DeaScreen() {
 
             </div>
 
-            <div style={{display:"flex", width:"auto", height:"auto"}}>
+            <div style={{display:"flex", width:"auto", height:"auto", gap: "5px"}}>
                 <Button size="xs" variant="filled" color="cyan" onClick={()=>exportSettingsToJson()}>Export settings</Button>
+                <FileInput size="xs" label="" description="" placeholder="Import settings"/>
             </div>
         </div>
     )
