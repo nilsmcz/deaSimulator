@@ -34,6 +34,31 @@ export default function DeaScreen() {
     const [transitionsActionSymbolInput, setTransitionsActionSymbolInput] = useState(null);
     const [transitionsEndStateInput, setTransitionsEndStateInput] = useState(null);
 
+    function exportSettingsToJson() {
+        const settings = {
+            alphabet: alphabet,
+            states: states,
+            startState: startState,
+            transitions: transitions
+        };
+    
+        const jsonSettings = JSON.stringify(settings, null, 2)
+    
+        const blob = new Blob([jsonSettings], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+    
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'settings.json'; //Filename
+    
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    
+        URL.revokeObjectURL(url);
+    }
+
     function addAlphabet(symbol) {
         if(symbol === "") return;
         if(alphabet.includes(symbol)) return;
@@ -237,6 +262,10 @@ export default function DeaScreen() {
                     <Button size="xs" variant="filled" color="red" onClick={()=>clearTransitions()}>Clear</Button>
                 </div>
 
+            </div>
+
+            <div style={{display:"flex", width:"auto", height:"auto"}}>
+                <Button size="xs" variant="filled" color="cyan" onClick={()=>exportSettingsToJson()}>Export settings</Button>
             </div>
         </div>
     )
