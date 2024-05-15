@@ -246,7 +246,7 @@ export default function DeaScreen() {
                         <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states} value={transitionsStartStateInput} onChange={setTransitionsStartStateInput}/></div>
                         ➝
                         <div style={{width:"80px"}}><Select size="xs" placeholder="symbol" data={alphabet} value={transitionsActionSymbolInput} onChange={setTransitionsActionSymbolInput}/></div>
-                        {transitionsActionSymbolInput != "ε" &&
+                        {transitionsActionSymbolInput !== "ε" &&
                             <div style={{width:"70px"}}><Select size="xs" placeholder="state" data={states} value={transitionsEndStateInput} onChange={setTransitionsEndStateInput}/></div>
                         }
                         <div style={{display:"flex", gap:"5px"}}>
