@@ -19,7 +19,7 @@ export default function DeaScreen() {
     const [word, setWord] = useState(""); //String
     function updateWord(word){
         setWord(word);
-        if(word == "") {
+        if(word === "") {
             setIsWordInLanguage(null);
             return;
         }
@@ -69,13 +69,13 @@ export default function DeaScreen() {
     
     function addStates(stateName) {
         stateName = stateName.trim();
-        if(stateName == "") return;
+        if(stateName === "") return;
         if(states.includes(stateName)) return;
 
         setStates([...states, stateName]);
         setStatesInput("");
 
-        if(startState == "") setStartState(stateName);
+        if(startState === "") setStartState(stateName);
     }
 
     function clearAlphabet() {
@@ -117,9 +117,9 @@ export default function DeaScreen() {
         if(startState == null || actionSymbol == null) return;
         if(actionSymbol !== "ε" && endState == null) return;
 
-        if(actionSymbol == "ε") endState = "ε";
+        if(actionSymbol === "ε") endState = "ε";
 
-        if(actionSymbol == "ε"){
+        if(actionSymbol === "ε"){
             endStates.push(startState);
         };
     
@@ -236,7 +236,7 @@ export default function DeaScreen() {
                 {Object.entries(transitions).map(([startState, transition]) => (
                     Object.entries(transition).map(([actionSymbol, endState]) => (
                         <div key={`${startState}-${actionSymbol}-${endState}`}>
-                            {`${startState} ➝ ${actionSymbol} ${(endState == null || endState == "ε") ? "" :  endState}`}
+                            {`${startState} ➝ ${actionSymbol} ${(endState == null || endState === "ε") ? "" :  endState}`}
                         </div>
                     ))
                 ))}
