@@ -117,7 +117,7 @@ export default function DeaScreen() {
         if(startState == null || actionSymbol == null) return;
         if(actionSymbol !== "ε" && endState == null) return;
 
-        if(endState == null || endState == "") endState = "ε";
+        if(actionSymbol == "ε") endState = "ε";
 
         if(actionSymbol == "ε"){
             endStates.push(startState);
@@ -264,9 +264,9 @@ export default function DeaScreen() {
 
             </div>
 
-            <div style={{display:"flex", width:"auto", height:"auto", gap: "5px"}}>
-                <Button size="xs" variant="filled" color="cyan" onClick={()=>exportSettingsToJson()}>Export settings</Button>
-                <FileInput size="xs" label="" description="" placeholder="Import settings"/>
+            <div style={{display:"flex", fleXDirection:"row", width:"auto", height:"auto", gap: "5px", justifyContent:"center", alignItems:"center"}}>
+                <Button size="xs" variant="filled" color="grey" onClick={()=>exportSettingsToJson()}>Export settings</Button>
+                <FileInput clearable accept=".json" size="xs" label="" description="" placeholder="Import settings"/>
             </div>
         </div>
     )
