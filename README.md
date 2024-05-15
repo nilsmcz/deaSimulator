@@ -39,6 +39,8 @@ q2 ➝ b q3
 
 Live-Vorschau: <a href="https://funny-kelpie-be23d3.netlify.app/" target="_blank">Vorschau anzeigen</a>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d29fe828-1f5a-4d2f-b26f-3f606441d980/deploy-status??branch=main)](https://app.netlify.com/sites/funny-kelpie-be23d3/deploys)
+
 # Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
