@@ -95,7 +95,7 @@ export default function DeaScreen() {
     }
 
     function clearStartState() {
-        setStartState("");
+        setStartState(null);
     }
 
     function clearEndStates() {
