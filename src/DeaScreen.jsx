@@ -34,7 +34,7 @@ export default function DeaScreen() {
     const [transitionsActionSymbolInput, setTransitionsActionSymbolInput] = useState(null);
     const [transitionsEndStateInput, setTransitionsEndStateInput] = useState(null);
 
-    // const [importSettingsFile, setImportSettingsFile] = useState<File | null>(null);
+    const [importSettingsFile, setImportSettingsFile] = useState(null);
 
     function exportSettingsToJson() {
         const settings = {
@@ -195,7 +195,13 @@ export default function DeaScreen() {
     }
 
     function importSettingsFromJson(file) {
-        // setImportSettingsFile(file);
+        setImportSettingsFile(file);
+        
+        if (!file) {
+            console.warn('No file selected');
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
@@ -290,7 +296,7 @@ export default function DeaScreen() {
 
             <div style={{display:"flex", fleXDirection:"row", width:"auto", height:"auto", gap: "5px", justifyContent:"center", alignItems:"center"}}>
                 <Button size="xs" variant="filled" color="grey" onClick={()=>exportSettingsToJson()}>Export settings</Button>
-                <FileInput multiple={false} clearable accept=".json" size="xs" label="" description="" placeholder="Import settings" onChange={(e) => importSettingsFromJson(e)}/>
+                <FileInput multiple={false} clearable accept=".json" size="xs" label="" description="" placeholder="Import settings" value={importSettingsFile} onChange={(e) => importSettingsFromJson(e)}/>
             </div>
         </div>
     )
