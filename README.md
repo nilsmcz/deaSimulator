@@ -10,6 +10,8 @@ Diese Anwendung ermöglicht es, einen deterministischen endlichen Automaten (DEA
 - Übergänge mit dem Epsilon-Symbol definieren (leerer Übergang)
 - Anzeige der aktuellen Zustände, des Alphabets und der definierten Übergänge
 - Bestätigungsfenster für das Überschreiben von bestehenden Übergängen
+- Einstellungen exportieren und importieren
+- Überprüfung, ob bestimmte Eingaben in der Sprache der gebauten Grammatik liegen oder nicht
 
 ## Verwendung
 
@@ -18,6 +20,9 @@ Diese Anwendung ermöglicht es, einen deterministischen endlichen Automaten (DEA
 3. Übergänge definieren: Wählen Sie den Startzustand, das Aktionssymbol und den Endzustand aus den Dropdown-Menüs aus und klicken Sie auf "Submit".
 4. Übergänge anzeigen: Alle definierten Übergänge werden unter dem Abschnitt "P" angezeigt.
 5. Löschen: Klicken Sie auf "Clear", um die Liste der Zustände, das Alphabet oder die Übergänge zu löschen.
+6. **Einstellungen exportieren:** Klicken Sie auf "Export", um die aktuellen Einstellungen des Automaten in einer Datei zu speichern.
+7. **Einstellungen importieren:** Klicken Sie auf "Import", um eine Datei mit gespeicherten Einstellungen zu laden und den Automaten entsprechend zu konfigurieren.
+8. **Eingaben überprüfen:** Geben Sie eine Eingabesequenz in das Textfeld ein und klicken Sie auf "Check", um zu überprüfen, ob die Eingabe in der Sprache der gebauten Grammatik liegt.
 
 ## Beispiel
 
