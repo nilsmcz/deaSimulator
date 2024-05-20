@@ -34,7 +34,7 @@ export default function DeaScreen() {
     const [transitionsActionSymbolInput, setTransitionsActionSymbolInput] = useState(null);
     const [transitionsEndStateInput, setTransitionsEndStateInput] = useState(null);
 
-    const [importSettingsFile, setImportSettingsFile] = useState<File | null>(null);
+    // const [importSettingsFile, setImportSettingsFile] = useState<File | null>(null);
 
     function exportSettingsToJson() {
         const settings = {
@@ -194,6 +194,28 @@ export default function DeaScreen() {
         }
     }
 
+    function importSettingsFromJson(file) {
+        // setImportSettingsFile(file);
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const importedSettings = JSON.parse(event.target.result);
+                
+                if (!Array.isArray(importedSettings.alphabet) || !Array.isArray(importedSettings.states) || typeof importedSettings.startState !== 'string' || typeof importedSettings.transitions !== 'object') {
+                    throw new Error('Ungültige Einstellungen.');
+                }
+
+                setAlphabet(importedSettings.alphabet);
+                setStates(importedSettings.states);
+                setStartState(importedSettings.startState);
+                setTransitions(importedSettings.transitions);
+            } catch (error) {
+                console.error('Fehler beim import:', error);
+            }
+        };
+        reader.readAsText(file);
+    }
+
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw", gap:"50px"}}>
 
@@ -268,7 +290,7 @@ export default function DeaScreen() {
 
             <div style={{display:"flex", fleXDirection:"row", width:"auto", height:"auto", gap: "5px", justifyContent:"center", alignItems:"center"}}>
                 <Button size="xs" variant="filled" color="grey" onClick={()=>exportSettingsToJson()}>Export settings</Button>
-                <FileInput multiple={false} clearable accept=".json" size="xs" label="" description="" placeholder="Import settings" value={importSettingsFile} onChange={setImportSettingsFile}/>
+                <FileInput multiple={false} clearable accept=".json" size="xs" label="" description="" placeholder="Import settings" onChange={(e) => importSettingsFromJson(e)}/>
             </div>
         </div>
     )
