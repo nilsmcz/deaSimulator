@@ -222,6 +222,22 @@ export default function DeaScreen() {
         reader.readAsText(file);
     }
 
+    function addTerminalSymbol(symbol) {
+        if(symbol.length == 1) {
+            if (wordStartsWithLetter(alphabet, symbol)) return
+        }
+        setAlphabetInput(symbol)
+    }
+
+    function wordStartsWithLetter(wordArray, letter) {
+        for (let i = 0; i < wordArray.length; i++) {
+            if (wordArray[i].startsWith(letter)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     return (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw", gap:"50px"}}>
 
@@ -255,7 +271,7 @@ export default function DeaScreen() {
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"start", alignItems:"center", gap:"20px"}}>
                     <Text size="md">&Sigma; = {`{${alphabet.join(', ')}}`}</Text>
                     <div style={{display:"flex", flexDirection:"row", gap:"5px"}}>
-                        <div style={{width:"50px"}}><TextInput size="xs" variant="filled" placeholder='"a"' value={alphabetInput} onChange={(event) => setAlphabetInput(event.currentTarget.value)}/></div>
+                        <div style={{width:"50px"}}><TextInput size="xs" variant="filled" placeholder='"a"' value={alphabetInput} onChange={(event) => addTerminalSymbol(event.currentTarget.value)}/></div>
                         <Button size="xs" variant="filled" color="cyan" onClick={()=>addAlphabet(alphabetInput)}>Add</Button>
                         <Button size="xs" variant="filled" color="red" onClick={()=>clearAlphabet()}>Clear</Button>
                     </div>
