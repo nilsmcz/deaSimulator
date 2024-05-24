@@ -24,6 +24,10 @@ Diese Anwendung ermöglicht es, einen deterministischen endlichen Automaten (DEA
 7. **Einstellungen importieren:** Klicken Sie auf "Import", um eine Datei mit gespeicherten Einstellungen zu laden und den Automaten entsprechend zu konfigurieren.
 8. **Eingaben überprüfen:** Geben Sie eine Eingabesequenz in das Textfeld ein und klicken Sie auf "Check", um zu überprüfen, ob die Eingabe in der Sprache der gebauten Grammatik liegt.
 
+## Todos
+- Menu um zukünftig zwischen den veschiedenen Funktionalitäten zu wechseln
+- CYK-Algorithmus und Chomsky-Hierarchie
+
 ## Beispiel
 
 Ein Beispiel für definierte Übergänge:
