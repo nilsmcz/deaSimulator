@@ -239,7 +239,7 @@ export default function DeaScreen() {
     }
 
     return (
-        <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100vw", gap:"50px"}}>
+        <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", height:"100vh", width:"100%", gap:"50px"}}>
 
             <Alert variant="light" color="red" title="Betaphase">
                 Diese Seite befindet sich in der Entwicklungsphase.

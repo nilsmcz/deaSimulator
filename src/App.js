@@ -4,7 +4,7 @@ import '@mantine/core/styles.css';
 import { ColorSchemeScript } from '@mantine/core';
 //Screens
 import DeaScreen from './DeaScreen';
-
+import Layout from './Layout';
 const theme = createTheme({
   /** Put your mantine theme override here */
 });
@@ -12,7 +12,8 @@ const theme = createTheme({
 function App() {
   return (
     <MantineProvider theme={theme}>
-      <DeaScreen />
+      {/* <DeaScreen /> */}
+      <Layout />
     </MantineProvider>
   );
 }
